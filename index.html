@@ -284,7 +284,7 @@ nav {
   font-size: 0.82rem;
   color: var(--text);
   white-space: nowrap;
-  min-width: 130px;
+  min-width: 160px;
 }
 
 .weight-val {
@@ -1343,7 +1343,7 @@ function renderResults(r) {
   });
 
   document.getElementById('aiSummary').textContent = r.summary;
-  document.getElementById('emailDraft').textContent = r.emailTemplate;
+  document.getElementById('emailDraft').textContent = r.emailTemplate || r.emailDraft || '';
 
   window.scrollTo({ top: document.getElementById('resultsSection').offsetTop - 80, behavior: 'smooth' });
 }
