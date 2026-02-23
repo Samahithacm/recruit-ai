@@ -25,7 +25,7 @@ export default async function handler(req, res) {
         },
         {
           role: 'user',
-          content: `JOB DESCRIPTION:\n${jd}\n\nRESUME:\n${resume}\n\nReturn exactly this JSON:\n{"score": 0, "action": "Interview", "summary": "summary here", "matchedKeywords": [], "missedKeywords": [], "skills": [{"label": "Technical Skills", "score": 0}, {"label": "Experience Level", "score": 0}, {"label": "Culture & Communication", "score": 0}]}`
+          content: `JOB DESCRIPTION:\n${jd}\n\nRESUME:\n${resume}\n\nAnalyze the resume against the job description and return ONLY this JSON with NO other text:\n{"score": <integer 0-100 representing overall match percentage>, "action": "Interview" or "Review" or "Reject", "summary": "<2-3 sentence assessment>", "matchedKeywords": ["<skills found in both JD and resume>"], "missedKeywords": ["<skills in JD but missing from resume>"], "skills": [{"label": "Technical Skills", "score": <integer 0-100>}, {"label": "Experience Level", "score": <integer 0-100>}, {"label": "Culture & Communication", "score": <integer 0-100>}]}\n\nIMPORTANT: Scores must be realistic percentages between 0-100. A strong match should score 70-90. A partial match should score 40-70. A weak match should score below 40.`
         }
       ]
     })
