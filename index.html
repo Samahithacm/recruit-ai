@@ -1209,23 +1209,16 @@ async function analyzeResume() {
   const btn = document.getElementById('analyzeBtn');
   btn.classList.add('loading');
 
-  // Try real n8n backend first; fall back to mock
-  const N8N_WEBHOOK = ''; // paste your n8n webhook URL here
-
-  try {
-    let result;
-    if (N8N_WEBHOOK) {
-      const res = await fetch(N8N_WEBHOOK, {
+  try{
+   let result;
+      const res = await fetch('/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ jd, resume: cv, weights: getWeights(), timestamp: new Date().toISOString() })
+        body: JSON.stringify({ jd, resume: cv })
       });
-      if (!res.ok) throw new Error('n8n error');
+      if (!res.ok) throw new Error('API error');
       result = await res.json();
-    } else {
-      await new Promise(r => setTimeout(r, 1800)); // simulate latency
-      result = mockAnalyze(jd, cv);
-    }
+  
     currentResult = result;
     renderResults(result);
     saveToHistory(result, jd, cv);
